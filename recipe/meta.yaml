@@ -6,11 +6,11 @@ package:
   version: {{ version }}
 
 source:
-  url: https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
+  url: https://pypi.org/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz
   sha256: f432797ee685ed495a2daa4dbb76e2b52028d2c3a38142b523bb5cb832df0882
 
 build:
-  number: 0
+  number: 1
   noarch: python
   entry_points:
     - nbmerge = nbmerge:main
@@ -18,13 +18,16 @@ build:
 
 requirements:
   host:
-    - python >=3.6
+    - python {{ python_min }}
     - pip
+    - setuptools
   run:
-    - python >=3.6
+    - python >={{ python_min }}
     - nbformat
 
 test:
+  requires:
+    - python {{ python_min }}
   imports:
     - nbmerge
 
